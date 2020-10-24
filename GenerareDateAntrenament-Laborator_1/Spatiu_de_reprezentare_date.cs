@@ -17,9 +17,9 @@ namespace GenerareDateAntrenament_Laborator_1
             InitializeComponent();
         }
 
+        //am desenat axele x0y
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
-            //am desenat axele x0y
             Graphics gObject = CreateGraphics();
             Brush black = new SolidBrush(Color.Black);
             Brush white = new SolidBrush(Color.White);
@@ -33,17 +33,21 @@ namespace GenerareDateAntrenament_Laborator_1
 
         //random.NextDouble returns a double between 0 and 1. Multipling that by 
         //the range the number should be into and add that to the base (minimum)
-        private double RandomNumber(int min, int max)
+        private double RandomNumber()
         {
+            int min = -300;
+            int max = 300;
             Random random = new Random();
             return random.NextDouble() * (min - max) + min;
         }
 
+        private double GaussFunction(double x, double m, double sigma)
+        {
+           double n = Math.Pow(m - x, 2);
+           return Math.Exp(- n / (2 * Math.Pow(sigma, 2)));
+        }
 
-
-
-
-
+     
 
     }
 }
