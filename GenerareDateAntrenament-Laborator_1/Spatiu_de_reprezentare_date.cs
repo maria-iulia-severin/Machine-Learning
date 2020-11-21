@@ -18,21 +18,21 @@ namespace GenerareDateAntrenament_Laborator_1
         private double x;
         private double y;
         //zone 1 - red
-        private double mx1 = 180;
-        private double my1 = 220;
+        private double mx1 = 180; //480
+        private double my1 = 220; //80
         private double sigmax1 = 10;
         private double sigmay1 = 10;
         //zone 2 - purple
-        private double mx2 = -110;
-        private double my2 = 110;
-        private double sigmax2 = 15;
+        private double mx2 = -110; //190
+        private double my2 = 110; //190
+        private double sigmax2 = 25;
         private double sigmay2 = 10;
         //zone 3 - yellow
-        private double mx3 = 210;
-        private double my3 = -150;
+        private double mx3 = 210; //510
+        private double my3 = -150; //450
         private double sigmax3 = 5;
         private double sigmay3 = 10;
-        //initialize zone between [0,3] 
+        //initialize zone
         private double zone;
         //maximum points
         private int points = 10000;
@@ -59,82 +59,67 @@ namespace GenerareDateAntrenament_Laborator_1
         }
         private void Zone()
         {
-            double prag;
-            double G;
+            double pragX;
+            double GX;
+            double pragY;
+            double GY;
 
             for (int i = 0; i < points; i++)
             {
                 zone = random.Next(0, 3);
-               /* prag = (double)(random.Next(0, 10000) / 10000.0);*/
                 do
                 {
                     x = RandomNumber();
-                   
-                   
                     //random.Next() - returns a positive random integer that is less than the specified maximum.
-                    prag = (double)(random.Next(0, 1000) / 1000.0);
-
+                    pragX = (double)(random.Next(1000) / 1000.0);
                     if (zone == 0)
                     {
-                        G = GaussFunction(x, mx1, sigmax1);
-                     //   Console.WriteLine("G:"+G+" "+"prag"+ prag+"zona "+ zone);
+                        GX = GaussFunction(x, mx1, sigmax1);
                     }
                     else if (zone == 1)
                     {
-                        G = GaussFunction(x, mx2, sigmax2);
-                      //  Console.WriteLine("G:" + G + " " + "prag" + prag + "zona " + zone);
+                        GX = GaussFunction(x, mx2, sigmax2);
                     }
                     else
                     {
-                        G = GaussFunction(x, mx3, sigmax3);
-                      //  Console.WriteLine("G:" + G + " " + "prag" + prag + "zona " + zone);
+                        GX = GaussFunction(x, mx3, sigmax3);
                     }
-                } while (G < prag);
+                } while (GX < pragX);
 
                 do
                 {
                     y = RandomNumber();
-                    
                     //random.Next() - returns a positive random integer that is less than the specified maximum.
-                    //prag = (double)(random.Next(0, 10000) / 10000.0);
-                    prag = (double)(random.Next(0, 1000) / 1000.0);
-
+                    pragY = (double)(random.Next(1000) / 1000.0);
                     if (zone == 0)
                     {
-                        G = GaussFunction(y, my1, sigmay1);
-                       // Console.WriteLine("G:" + G + " " + "prag" + prag + "zona " + zone);
+                        GY = GaussFunction(y, my1, sigmay1);
+                       
                     }
                     else if (zone == 1)
                     {
-                        G = GaussFunction(y, my2, sigmay2);
-                      //  Console.WriteLine("G:" + G + " " + "prag" + prag + "zona " + zone);
+                        GY = GaussFunction(y, my2, sigmay2);
+                     
                     }
                     else
                     {
-                        G = GaussFunction(y, my3, sigmay3);
-                       // Console.WriteLine("G:" + G + " " + "prag" + prag + "zona " + zone);
+                        GY = GaussFunction(y, my3, sigmay3);
+                      
                     }
-                } while (G < prag);
+                } while (GY < pragY);
 
-                //G=0 si prag foarte mic -> am puncte in stanga jos -clopotul ar veni pe 0 acolo jos
-                Draw(x, y);
-                //Draw(x+300, 300-y);
-              //  file.WriteLine(x + " " + y + " " + zone);
-                file.WriteLine("Coordonates: " + "x=" + x.ToString() + " y=" + y.ToString() + " zona=" + zone.ToString());
+                Console.Write("GX:"+GX+" pragX:"+pragX+ "GY:" + GY + " pragY:" + pragY + " x:" +x +" y:" + y+"   "+ "\t");
+
+                Draw(x+300,300-y);
+
+                file.WriteLine("x="+ x +" y="+ y +" zona=" + zone);
             }
-            //file.Dispose();
         }
 
         private void Draw(double x, double y)
         {
-
             Graphics gObject = CreateGraphics();
-            //x = Math.Abs(x);
-            //y = Math.Abs(y);
-            /*    Console.Write(x + " " + y + " " + "\t");*/
-            x = x+300;
-            y = 300- y;
-            /*    Console.WriteLine(x + " " + y + " " + zone);*/
+            Console.WriteLine("x:"+x+" y:"+y+" zona:"+zone);
             if (zone == 0)
             {
                 gObject.FillEllipse(new SolidBrush(Color.Red), (float)x, (float)y, 2.0F, 2.0F);
@@ -156,7 +141,6 @@ namespace GenerareDateAntrenament_Laborator_1
         {
             int min = -300;
             int max = 300;
-            // return random.NextDouble() * (min - max) + min;
             return random.Next(min, max);
         }
 
