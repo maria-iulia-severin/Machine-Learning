@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Centroid.cs" />
     <Compile Include="Spatiu_de_reprezentare_date.cs">
       <SubType>Form</SubType>
     </Compile>
