@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Centroid.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Spatiu_de_reprezentare_date.cs">
       <SubType>Form</SubType>
     </Compile>

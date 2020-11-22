@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,12 @@ namespace KMeans_Laborator_2
         private List<Color> oldColor = new List<Color>();
         private Color newColor;
         private Color[] colors = new Color[] { Color.Magenta, Color.LightBlue, Color.LightCoral, Color.LightGreen, Color.Orange, Color.Orchid, Color.Olive, Color.Pink, Color.Purple, Color.PowderBlue };
-        private object panelWindow;
-
+        StreamReader file = new StreamReader("coordinates.txt");
         public Spatiu_de_reprezentare_date()
         {
             InitializeComponent();
+            ReadPoints();
+            GenerareCentroizi();
         }
 
         //am desenat axele x0y
@@ -39,8 +41,9 @@ namespace KMeans_Laborator_2
             gObject.DrawLine(whitePen, 320, 20, 320, 520);
             gObject.DrawLine(whitePen, 20, 270, 620, 270);
             gObject.Dispose();
-            GenerareCentroizi();
+           // GenerareCentroizi();
             DrawCentroizi();
+            DrawPoints();
         }
 
         //generez centroizii
@@ -76,7 +79,7 @@ namespace KMeans_Laborator_2
 
                 //  int xCentroid = panelWindow.Width - panelWindow.Width / 2 + c.getX();
                 // int yCentroid = panelWindow.Height - panelWindow.Height / 2 - c.getY();
-                if ((xCentroid < 600 && xCentroid > 2) && (yCentroid < 577 && yCentroid > 2))
+                if ((xCentroid < 600 && xCentroid > 40) && (yCentroid < 500 && yCentroid > 40))
                 {
                     
                     gObject.FillEllipse(new SolidBrush(c.color), new Rectangle(xCentroid - 5, yCentroid - 5, 10, 10));
@@ -87,6 +90,41 @@ namespace KMeans_Laborator_2
             gObject.Dispose();
 
         }
+
+        private void ReadPoints()
+        {
+            string line = String.Empty;
+            string[] values;
+            while ((line = file.ReadLine()) != null)
+            {
+                values = line.Split(' ');
+                points.Add(new Point(Convert.ToInt16(values[0]), Convert.ToInt16(values[1]), Color.White));
+            }
+            file.Close();
+        }
+
+        private void DrawPoints()
+        {
+            Graphics gObject = CreateGraphics();
+
+            foreach (Point p in points)
+            {
+                int xPoint = 300 + p.getX();
+                int yPoint = 300 - p.getY();
+                if ((xPoint < 600 && xPoint > 0) && (yPoint < 500 && yPoint > 0))
+                {
+                    
+                    gObject.FillEllipse(new SolidBrush(p.color), new Rectangle(xPoint - 2, yPoint - 2, 2, 2));
+                }
+            }
+            gObject.Dispose();
+
+        }
+
+
+
+
+
 
         private int RandomNumber()
         {

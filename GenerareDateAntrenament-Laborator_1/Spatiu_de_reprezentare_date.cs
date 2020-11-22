@@ -112,7 +112,7 @@ namespace GenerareDateAntrenament_Laborator_1
 
                 Draw(x+300,300-y);
 
-                file.WriteLine("x="+ x +" y="+ y +" zona=" + zone);
+                file.WriteLine(x +" "+ y);
             }
         }
 
