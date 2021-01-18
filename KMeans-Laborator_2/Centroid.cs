@@ -15,7 +15,7 @@ namespace KMeans_Laborator_2
         public Color color;
         public int zonaCentroid;
 
-        public Centroid(int x, int y, Color color, int zonaCentroid = 0)
+        public Centroid(int x, int y, Color color, int zonaCentroid)
         {
             this.x = x;
             this.y = y;
